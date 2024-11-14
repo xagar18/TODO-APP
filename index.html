@@ -8,18 +8,21 @@
     <script src="https://sdk.amazonaws.com/js/aws-sdk-2.799.0.min.js"></script>
   </head>
   <body>
-    <div class="container">
-      <div class="content">
-        <h1>To-Do List</h1>
-        <input type="text" placeholder="Enter Your Username" id="username" />
-        <button id="validate">Validate</button>
-        <div class="inputcontainer hidden">
-          <input type="text" placeholder="Add a new task..." id="todoinput" />
-          <button id="addtask">Add Task</button>
+    <div class="wrapper">
+      <div class="container">
+        <div class="content">
+          <h1>To-Do List</h1>
+          <input type="text" placeholder="Enter Your Username" id="username" />
+          <button id="validate">Validate</button>
+          <div class="inputcontainer hidden">
+            <input type="text" placeholder="Add a new task..." id="todoinput" />
+            <button id="addtask">Add Task</button>
+          </div>
+          <ul id="todolist"></ul>
         </div>
-        <ul id="todolist"></ul>
       </div>
     </div>
+    <footer><p>&copy; 2024 Sagar Yadav. All rights reserved.</p></footer>
     <script src="script.js"></script>
   </body>
 </html>

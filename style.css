@@ -1,12 +1,18 @@
 body {
   background-color: #1a1a1a;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
   height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
 }
 .container {
   min-height: 390px;
@@ -103,6 +109,9 @@ li button {
 .hidden {
   display: none;
 }
+footer {
+  text-align: center;
+}
 
 @media screen and (max-width: 600px) {
   body {
@@ -156,5 +165,11 @@ li button {
     width: 60px;
     border-radius: 3px;
     font-size: 12px;
+  }
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
   }
 }

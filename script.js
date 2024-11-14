@@ -13,6 +13,7 @@ const predefinedUsernames = [
   "anou12",
   "renuka",
   "archi011",
+  "temp1",
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
