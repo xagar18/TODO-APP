@@ -101,7 +101,7 @@ li button {
   font-size: 14px;
 }
 .hidden {
-  /* display: none; */
+  display: none;
 }
 
 @media screen and (max-width: 600px) {
