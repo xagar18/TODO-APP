@@ -6,7 +6,7 @@ body {
   align-items: center;
   height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden;
+  overflow: auto;
 }
 .container {
   min-height: 390px;
@@ -17,6 +17,7 @@ body {
   /* align-items: center; */
   border: 2px;
   border-radius: 10px;
+  overflow: auto;
 }
 .container h1 {
   text-align: center;
