@@ -7,7 +7,13 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 let username = ""; // Variable to store the username
 
 // Predefined list of usernames
-const predefinedUsernames = ["sagar9", "sagar8", "anou12", "renuka"];
+const predefinedUsernames = [
+  "sagar9",
+  "sagar8",
+  "anou12",
+  "renuka",
+  "archi011",
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   const usernameInput = document.getElementById("username");
