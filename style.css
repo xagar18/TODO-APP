@@ -22,8 +22,32 @@ body {
 .container h1 {
   text-align: center;
 }
-input {
-  margin-top: 40px;
+#username {
+  margin-top: 20px;
+  height: 20px;
+  width: 250px;
+  margin-right: 10px;
+  padding: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  border: 2px solid rgb(74, 46, 46);
+  border-radius: 7px;
+  outline: none;
+}
+#validate {
+  height: 38px;
+  width: 80px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  background-color: rgb(100, 233, 105);
+  color: wheat;
+  border-radius: 6px;
+  border: 2px solid grey;
+}
+
+#todoinput {
+  margin-top: 10px;
   height: 30px;
   width: 250px;
   margin-right: 10px;
@@ -75,6 +99,9 @@ li button {
   color: #ffff;
   font-weight: 600;
   font-size: 14px;
+}
+.hidden {
+  display: none;
 }
 
 @media screen and (max-width: 600px) {

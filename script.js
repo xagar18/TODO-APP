@@ -4,17 +4,38 @@ AWS.config.update({
   secretAccessKey: "mzM+aI7jEQ7tNlUaGPo1h0n5sC9SvBfmABXUWw8B",
 });
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+let username = ""; // Variable to store the username
+
+// Predefined list of usernames
+const predefinedUsernames = ["sagar", "sagar1", "anou", "user4"];
 
 document.addEventListener("DOMContentLoaded", () => {
+  const usernameInput = document.getElementById("username");
+  const validateButton = document.getElementById("validate");
   const todoInp = document.getElementById("todoinput");
   const addtaskbtn = document.getElementById("addtask");
   const todoList = document.getElementById("todolist");
+  const inputContainer = document.querySelector(".inputcontainer");
 
-  loadTasks();
+  validateButton.addEventListener("click", () => {
+    username = usernameInput.value.trim();
+    if (username === "") {
+      alert("Please enter your username.");
+      return;
+    }
+    if (!predefinedUsernames.includes(username)) {
+      alert("Invalid username. Please use a valid username.");
+      return;
+    }
+    loadTasks();
+    inputContainer.classList.remove("hidden");
+    usernameInput.style.display = "none";
+    validateButton.style.display = "none"; // Show the input container
+  });
 
   addtaskbtn.addEventListener("click", () => {
     const taskText = todoInp.value.trim();
-    if (taskText === "") return;
+    if (taskText === "" || username === "") return;
     const newTask = {
       id: Date.now().toString(),
       text: taskText,
@@ -29,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = {
       TableName: "ToDoListTasks",
       Item: {
-        userId: "exampleUserId",
+        userId: username, // Use the captured username
         taskId: task.id,
         text: task.text,
         completed: task.completed,
@@ -50,11 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadTasks() {
+    // Clear the existing tasks in the list
+    todoList.innerHTML = "";
+
     const params = {
       TableName: "ToDoListTasks",
       KeyConditionExpression: "userId = :userId",
       ExpressionAttributeValues: {
-        ":userId": "exampleUserId",
+        ":userId": username, // Use the captured username
       },
     };
     dynamoDB.query(params, (err, data) => {
@@ -105,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = {
       TableName: "ToDoListTasks",
       Key: {
-        userId: "exampleUserId",
+        userId: username, // Use the captured username
         taskId: task.id,
       },
       UpdateExpression: "set completed = :completed",
@@ -129,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = {
       TableName: "ToDoListTasks",
       Key: {
-        userId: "exampleUserId",
+        userId: username, // Use the captured username
         taskId: task.id,
       },
     };
