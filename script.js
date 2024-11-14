@@ -7,7 +7,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 let username = ""; // Variable to store the username
 
 // Predefined list of usernames
-const predefinedUsernames = ["sagar", "sagar1", "anou", "user4"];
+const predefinedUsernames = ["sagar9", "sagar8", "anou12", "renuka"];
 
 document.addEventListener("DOMContentLoaded", () => {
   const usernameInput = document.getElementById("username");
@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     if (!predefinedUsernames.includes(username)) {
-      alert("Invalid username. Please use a valid username.");
+      alert(
+        "Invalid username. Please contact admin at sagaryadav6352@gmail.com."
+      );
       return;
     }
     loadTasks();
