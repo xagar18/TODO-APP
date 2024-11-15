@@ -1,18 +1,19 @@
 body {
   background-color: #1a1a1a;
   color: #fff;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
-  height: 100vh;
+  /* height: 100vh; */
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
 }
 .wrapper {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   height: 500px;
+  margin-left: 40%;
+  /* background-color: green; */
+  width: 400px;
+  position: relative;
 }
 .container {
   min-height: 390px;
@@ -20,13 +21,22 @@ body {
   display: flex;
   background-color: rgb(54, 22, 22);
   justify-content: center;
-  /* align-items: center; */
   border: 2px;
   border-radius: 10px;
   overflow: hidden;
 }
+.nav {
+  display: flex;
+  /* background-color: red; */
+  align-items: center;
+}
+
 .container h1 {
   text-align: center;
+  width: 100%;
+}
+.content i {
+  font-size: 30px;
 }
 #username {
   margin-top: 20px;
@@ -43,15 +53,14 @@ body {
 #validate {
   height: 38px;
   width: 80px;
-  font-size: 15px;
+  font-size: 14px;
   font-family: Arial, sans-serif;
   font-weight: 600;
   background-color: rgb(100, 233, 105);
-  color: wheat;
+  color: rgb(0, 0, 0);
   border-radius: 6px;
   border: 2px solid grey;
 }
-
 #todoinput {
   margin-top: 10px;
   height: 30px;
@@ -75,7 +84,6 @@ body {
   border-radius: 6px;
   border: 2px solid grey;
 }
-
 li {
   margin-top: 10px;
   list-style-type: none;
@@ -86,14 +94,14 @@ li {
   margin-left: -38px;
   height: 40px;
   display: flex;
+  align-items: center;
   border-radius: 4px;
   padding-left: 8px;
-  align-items: center;
-  justify-content: space-between;
 }
-.completed {
-  text-decoration: line-through;
-  color: grey;
+li .task-text {
+  margin-left: 10px;
+  flex-grow: 1; /* Allows the text to take up available space */
+  text-align: left;
 }
 li button {
   margin-right: 10px;
@@ -102,74 +110,252 @@ li button {
   border-radius: 4px;
   border: none;
   background-color: red;
-  color: #ffff;
+  color: #fff;
   font-weight: 600;
   font-size: 14px;
+}
+.completed {
+  text-decoration: line-through;
+  color: grey;
 }
 .hidden {
   display: none;
 }
 footer {
   text-align: center;
+  /* background: red; */
+  margin-top: 180px;
 }
+.edit-input {
+  flex-grow: 1;
+  margin-left: 2px;
+  font-size: 16px;
+  padding: 3px;
+  border: none;
+  border-radius: 0px;
+  outline: none;
+  background-color: transparent;
+  color: white;
+}
+
+.ok-button {
+  height: 25px;
+  width: 40px;
+  margin-left: 10px;
+  font-size: 14px;
+  border: none;
+  background-color: green;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 4px;
+}
+.task-counter-container {
+  text-align: center;
+  /* margin: auto; */
+  /* height: 100px; */
+  /* width: 200px; */
+  margin-top: 15px;
+  /* background-color: red; */
+}
+
+#toggle-counter {
+  padding: 8px 10px;
+  font-size: 16px;
+  background-color: #75f359;
+  color: #0b0b0b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#toggle-counter:hover {
+  background-color: #69ef9a;
+}
+
+.task-counter {
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.task-counter p {
+  margin: 5px 0;
+}
+
+#total-tasks,
+#completed-tasks {
+  font-weight: bold;
+}
+
+/* Add this CSS to your existing style.css file */
 
 @media screen and (max-width: 600px) {
   body {
+    width: 100%;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
     overflow: auto;
+  }
+  .wrapper {
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: center;
+    align-items: center; */
+    height: 00px;
+    margin-top: 50px;
+    margin-left: 10px;
+    /* background-color: green; */
+    width: 100%;
+    position: relative;
   }
   .container {
-    min-height: 350px;
-    width: 320px;
-    border-radius: 10px;
+    min-height: 450px;
+    width: 350px;
+
     overflow: auto;
   }
-  #todoinput {
-    margin-top: 20px;
-    height: 20px;
-    width: 200px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 4px;
-    font-size: 12px;
-    border-radius: 5px;
-  }
-  #addtask {
-    height: 35px;
-    width: 75px;
-    font-size: 13px;
+
+  .container h1 {
+    font-size: 26px;
   }
   #username {
-    margin-top: 20px;
-    height: 20px;
-    width: 200px;
-    margin-left: 5px;
+    margin-top: 18px;
+    height: 17px;
+    width: 180px;
     margin-right: 5px;
-    padding: 4px;
+    padding: 5px;
+    font-weight: 400;
     font-size: 12px;
-    border-radius: 5px;
   }
   #validate {
     height: 30px;
-    width: 70px;
-    border-radius: 5px;
+    width: 65px;
     font-size: 12px;
-    font-size: 15px;
+    font-weight: 600;
+    color: rgb(23, 22, 22);
+    border-radius: 6px;
+    border: 1px solid grey;
+  }
+  #todoinput {
+    margin-top: 8px;
+    height: 18px;
+    width: 200px;
+    margin-right: 5px;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 13px;
+    border: 1px solid rgb(74, 46, 46);
+    border-radius: 5px;
+  }
+  #addtask {
+    height: 30px;
+    width: 65px;
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 5px;
+    border: 1px solid grey;
   }
   li {
     margin-top: 10px;
-    font-size: 13px;
+    list-style-type: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: rgb(78, 35, 35);
+    margin-left: -38px;
     height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    padding-left: 8px;
+  }
+  li .task-text {
+    margin-left: 10px;
+    flex-grow: 1; /* Allows the text to take up available space */
+    text-align: left;
+    font-size: 14px;
   }
   li button {
+    margin-right: 8px;
     height: 20px;
-    width: 60px;
-    border-radius: 3px;
+    width: 52px;
+    background-color: rgb(171, 13, 13);
+    font-weight: 600;
     font-size: 12px;
   }
-  .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 400px;
+  footer {
+    width: 100%;
+    text-align: center;
+    /* background: red; */
+    margin-top: 650px;
+  }
+  .edit-input {
+    width: 20px;
+    flex-grow: 1;
+    margin-left: 10px;
+    font-size: 14px;
+    padding: 0px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background-color: transparent;
+    color: white;
+  }
+
+  .ok-button {
+    height: 25px;
+    width: 40px;
+    margin-left: 10px;
+    font-size: 14px;
+    border: none;
+    background-color: green;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+  }
+  .task-counter-container {
+    text-align: center;
+    /* margin: auto; */
+    /* height: 100px; */
+    /* width: 200px; */
+    margin-top: 15px;
+    /* background-color: red; */
+  }
+
+  #toggle-counter {
+    padding: 8px 10px;
+    font-size: 16px;
+    background-color: #75f359;
+    color: #0b0b0b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #toggle-counter:hover {
+    background-color: #69ef9a;
+  }
+
+  .task-counter {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .task-counter p {
+    margin: 5px 0;
+  }
+
+  #total-tasks,
+  #completed-tasks {
+    font-weight: bold;
   }
 }

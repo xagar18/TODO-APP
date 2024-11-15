@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const addtaskbtn = document.getElementById("addtask");
   const todoList = document.getElementById("todolist");
   const inputContainer = document.querySelector(".inputcontainer");
+  const toggleCounterButton = document.getElementById("toggle-counter");
+  const taskCounter = document.querySelector(".task-counter");
 
   validateButton.addEventListener("click", () => {
     username = usernameInput.value.trim();
@@ -42,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
     validateButton.style.display = "none"; // Show the input container
   });
 
+  toggleCounterButton.addEventListener("click", () => {
+    taskCounter.classList.toggle("hidden");
+    toggleCounterButton.textContent = taskCounter.classList.contains("hidden")
+      ? "Show Task Counts"
+      : "Hide Task Counts";
+  });
+
   addtaskbtn.addEventListener("click", () => {
     const taskText = todoInp.value.trim();
     if (taskText === "" || username === "") return;
@@ -52,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     saveTask(newTask);
     renderTask(newTask);
+    updateTaskCounters(); // Update task counters
     todoInp.value = "";
   });
 
@@ -103,13 +113,55 @@ document.addEventListener("DOMContentLoaded", () => {
           completed: item.completed,
         }));
         tasks.forEach((task) => renderTask(task));
+        updateTaskCounters(); // Update task counters
       }
     });
   }
 
   function renderTask(task) {
     const elem = document.createElement("li");
-    elem.innerHTML = `${task.text} <button> Delete </button>`;
+
+    // Create and configure checkbox
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.completed;
+    checkbox.addEventListener("change", () => {
+      task.completed = checkbox.checked;
+      updateTask(task);
+      elem.classList.toggle("completed", task.completed);
+      updateTaskCounters(); // Update task counters
+    });
+
+    // Create task text element and add class for styling
+    const taskText = document.createElement("span");
+    taskText.textContent = task.text;
+    taskText.className = "task-text";
+
+    // Create edit button
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      editTask(task, taskText, editButton);
+    });
+
+    // Create delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteTask(task);
+      elem.remove();
+      updateTaskCounters(); // Update task counters
+    });
+
+    // Append elements to list item
+    elem.appendChild(checkbox);
+    elem.appendChild(taskText);
+    elem.appendChild(editButton);
+    elem.appendChild(deleteButton);
+
+    // Append list item to the list
     todoList.appendChild(elem);
 
     // Animation
@@ -119,19 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 0);
 
     if (task.completed) elem.classList.add("completed");
-
-    elem.addEventListener("click", (e) => {
-      if (e.target.tagName === "BUTTON") return;
-      task.completed = !task.completed;
-      updateTask(task);
-      elem.classList.toggle("completed");
-    });
-
-    elem.querySelector("button").addEventListener("click", (e) => {
-      e.stopPropagation();
-      deleteTask(task);
-      elem.remove();
-    });
   }
 
   function updateTask(task) {
@@ -141,8 +180,12 @@ document.addEventListener("DOMContentLoaded", () => {
         userId: username, // Use the captured username
         taskId: task.id,
       },
-      UpdateExpression: "set completed = :completed",
+      UpdateExpression: "set #textAttr = :text, completed = :completed",
+      ExpressionAttributeNames: {
+        "#textAttr": "text", // Alias for the attribute name "text"
+      },
       ExpressionAttributeValues: {
+        ":text": task.text,
         ":completed": task.completed,
       },
     };
@@ -177,4 +220,53 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  function updateTaskCounters() {
+    const totalTasks = document.querySelectorAll("#todolist li").length;
+    const completedTasks = document.querySelectorAll(
+      "#todolist li.completed"
+    ).length;
+    const remainingTasks = totalTasks - completedTasks;
+
+    document.getElementById("total-tasks").textContent = totalTasks;
+    document.getElementById("completed-tasks").textContent = completedTasks;
+    document.getElementById("remaining-tasks").textContent = remainingTasks;
+  }
+
+  function editTask(task, taskText, editButton) {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = task.text;
+    input.className = "edit-input";
+
+    const okButton = document.createElement("button");
+    okButton.textContent = "OK";
+    okButton.className = "ok-button";
+    okButton.addEventListener("click", () => {
+      const newText = input.value.trim();
+      if (newText !== "" && newText !== task.text) {
+        task.text = newText;
+        updateTask(task); // Call updateTask to save the changes to the server only if there is a change
+      }
+      taskText.textContent = task.text;
+      taskText.style.display = "";
+      editButton.style.display = "";
+      input.remove();
+      okButton.remove();
+    });
+
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        okButton.click();
+      }
+    });
+
+    taskText.style.display = "none";
+    editButton.style.display = "none";
+    taskText.parentNode.insertBefore(input, taskText);
+    taskText.parentNode.insertBefore(okButton, editButton);
+    input.focus();
+  }
+
+  // Add this to your existing script.js file
 });
